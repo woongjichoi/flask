@@ -1,7 +1,12 @@
 # https://thecodex.me/blog/speech-recognition-with-python-and-flask
-# 파이썬 음성 인식 라이브러리 SpeechRecognition (https://pypi.org/project/SpeechRecognition/) 사용
 # 1. 사용자로부터 입력 오디오 파일을 받는 간단한 Flask 웹 어플리케이션 빌드하기 (21-05-18)
 # 2. 오디오 파일 분석 및 텍스트 변환 (21-05-19)
+# 3. 전사 + 마지막 터치 표시 (21-05-21)
+
+# <개선점>
+# 입력받은 오디오 파일 분석 → 마이크에서 입력받은 음성 분석
+# 파이썬 음성 인식 라이브러리 SpeechRecognition(https://pypi.org/project/SpeechRecognition/) → Google Cloud STT API
+# transcribe 시간 단축
 
 from flask import Flask, render_template, request, redirect
 import speech_recognition as sr # pip3 install --upgrade speechrecognition
