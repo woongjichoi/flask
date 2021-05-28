@@ -2,13 +2,22 @@
 # 1. 사용자로부터 입력 오디오 파일을 받는 간단한 Flask 웹 어플리케이션 빌드하기 (21-05-18)
 # 2. 오디오 파일 분석 및 텍스트 변환 (21-05-19)
 # 3. 전사 + 마지막 터치 표시 (21-05-21)
+# https://github.com/Uberi/speech_recognition/blob/master/examples/microphone_recognition.py
+# 기존의 입력받은 오디오 파일을 분석하는 방식에서 마이크에서 입력받은 음성을 분석하는 방식으로 변환 (21-05-26)
+# HTML, CSS 수정 (21-05-28)
 
 # <개선점>
-# 입력받은 오디오 파일 분석 → 마이크에서 입력받은 음성 분석
-# 파이썬 음성 인식 라이브러리 SpeechRecognition(https://pypi.org/project/SpeechRecognition/) → Google Cloud STT API
-# transcribe 시간 단축
+# (해결) 1. 입력받은 오디오 파일 분석 → 마이크에서 입력받은 음성 분석
+# (해결) 1-1. HTML, CSS 수정
+# 2. 시끄러운 상황(ex. 노래 틀어놓기)에서도 음성 인식되는지 검증 ★
+# 2. 파이썬 음성 인식 라이브러리 SpeechRecognition(https://pypi.org/project/SpeechRecognition/) → Google Cloud STT API
+# 3. transcribe 시간 단축 (음성 파일 길이 때문일 수도 있음!)
 
 from flask import Flask, render_template, request, redirect
+# NOTE: this example requires PyAudio because it uses the Microphone class
+#   - 윈도우는 PyAudio 설치 시 http://dslab.sangji.ac.kr/?p=2550과 같은 방법으로 해결해야 하는데 캡처와 같은 오류 발생하여 경로에 접근
+#   - what is the current encoding of the file? ansi
+#   - 주석보다 최상단에 #coding=<utf-8> 입력 후 다시 pipwin install pyaudio 실행하여 오류 해결
 import speech_recognition as sr # pip3 install --upgrade speechrecognition
 
 app = Flask(__name__)
@@ -16,30 +25,23 @@ app = Flask(__name__)
 @app.route("/", methods=["GET", "POST"])
 def index():
     transcript=""
-    if request.method=="POST":
-        print("FORM DATA RECEIVED")
 
-        # 요청의 POST 메소드에 "file"이 있는지 확인
-        if "file" not in request.files:
-            return redirect(request.url)
+    # 마이크에서 오디오 얻기
+    r=sr.Recognizer()
+    with sr.Microphone() as source:
+        print("Say something!")
+        audio=r.listen(source)
 
-        file=request.files["file"] # 입력받은 오디오 파일
-        # 완료되면 파일에 실제로 파일 이름 있는지 확인
-        if file.filename=="":
-            return redirect(request.url)
-
-        # 파일이 성공적으로 전달되면 분석 가능한 형식으로 변환
-        if file:
-            recognizer=sr.Recognizer()
-            audioFile=sr.AudioFile(file) # 입력받은 오디오 파일에 대해 SpeechRecognition의 AudioFile 인스턴스 반환
-            with audioFile as source:
-                data=recognizer.record(source)
-            transcript=recognizer.recognize_google(data, key=None)
-            # Google의 음성 인식 API 실행
-            # 기본 인식기 .recognize_google은 대략 1분 미만의 오디오 텍스트 변환을 허용함
-            # 더 큰 파일을 분석하려면 실제 API 키 지정 or Google API 키에서 유료 라이선스로 업그레이드
-            # (https://pypi.org/project/SpeechRecognition/)
-            print(transcript)
+    # Google Speech Recognition을 이용해 음성 인식하기
+    # to use another API key, use `r.recognize_google(audio, key="GOOGLE_SPEECH_RECOGNITION_API_KEY")`
+    # instead of `r.recognize_google(audio)`
+    try:
+        transcript=r.recognize_google(audio, language="ko-KR")
+        print("Google Speech Recognition thinks you said "+transcript)
+    except sr.UnknownValueError:
+        print("Google Speech Recognition could not understand audio")
+    except sr.RequestError as e:
+        print("Could not request results from Google Speech Recognition service; {0}".format(e))
 
     return render_template('index.html', transcript=transcript)
 

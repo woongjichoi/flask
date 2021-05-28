@@ -8,11 +8,9 @@
 </head>
 <body>
 <div id="speechContainer">
-    <h1>Upload new File</h1>
+    <h1>Say something!</h1>
     <form method="post" enctype="multipart/form-data">
-        <input type="file" name="file"/>
         <br>
-        <input type="submit" id="submitButton" value="Transcribe"/>
     </form>
 
     {% if transcript != "" %}
