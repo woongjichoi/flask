@@ -12,7 +12,7 @@
 # (해결) 1. 입력받은 오디오 파일 분석 → 마이크에서 입력받은 음성 분석
 # (해결) 1-1. HTML, CSS 수정
 # (해결) 2. pyttsx3 한국어 지원
-# 2. 시끄러운 상황(ex. 노래 틀어놓기)에서도 음성 인식되는지 검증 ★
+# (해결) 2. 시끄러운 상황(ex. 노래 틀어놓기)에서도 음성 인식되는지 검증 ★
 # 3. 파이썬 음성 인식 라이브러리 SpeechRecognition(https://pypi.org/project/SpeechRecognition/) → Google Cloud STT API
 # 3. 파이썬 텍스트 음성 변환 라이브러리 pyttsx3 → Google Cloud TTS API
 # 4. transcribe 시간 단축 (음성 파일 길이 때문일 수도 있음!)
@@ -33,8 +33,8 @@ def text_to_speech(text, gender):
     code = voice_dict[gender]
 
     engine = pyttsx3.init()
-    engine.setProperty('rate', 125)  # 말하기 속도
-    engine.setProperty('volume', 0.8)  # 볼륨 (min=0, MAX=1)
+    engine.setProperty('rate', 150)  # 말하기 속도
+    engine.setProperty('volume', 1)  # 볼륨 (min=0, MAX=1)
     voices = engine.getProperty('voices')
     engine.setProperty('voice', voices[code].id)
 
