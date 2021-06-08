@@ -40,7 +40,7 @@ def clean_words(documents):
         document = ' '.join(clean_words)
         documents[i] = document
 
-    #텍불용어 제거
+    #불용어 제거
     df = pd.read_csv('https://raw.githubusercontent.com/cranberryai/todak_todak_python/master/machine_learning_text/clean_korean_documents/korean_stopwords.txt', header=None)
     df[0] = df[0].apply(lambda x: x.strip())
     stopwords = df[0].to_numpy()
@@ -256,10 +256,10 @@ Intent('카드 결제 해주세요')
 #예제문장 4:'키오스크 사용방법 알려주세요'
 Intent("키오스크 사용방법 알려주세요")
 
-#예제문장 4:'포인트 적립할게요'
+#예제문장 5:'포인트 적립할게요'
 Intent('포인트 적립할게요')
 
-#예제문장 4:'포인트 적립할게요'
+#예제문장 6:'기계 글자 설명해줘'
 Intent('기계 글자 설명해줘')
 
 #챗봇 대화(의도만 출력) 
