@@ -499,7 +499,7 @@ def accuracy(y_true, y_pred):
 
 model.compile(optimizer=optimizer, loss=loss_function, metrics=[accuracy])
 
-EPOCHS = 200
+EPOCHS = 1000
 model.fit(dataset, epochs=EPOCHS)
 
 def evaluate(sentence):
