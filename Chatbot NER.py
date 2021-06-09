@@ -209,6 +209,7 @@ print(classification_report(test_tags, pred_tags))
 
 print("F1-score: {:.1%}".format(f1_score(test_tags, pred_tags)))
 
+'''
 from keras.models import Sequential
 from keras.layers import LSTM, Embedding, Dense, TimeDistributed, Dropout, Bidirectional
 from keras.models import load_model
@@ -251,6 +252,7 @@ test_tags = f1score.sequences_to_tags(y_test)
 print(classification_report(test_tags, pred_tags))
 
 print("F1-score: {:.1%}".format(f1_score(test_tags, pred_tags)))
+'''
 
 new_sentence='새우 버거 하나 주문 할게요.'.lower().split()
 
