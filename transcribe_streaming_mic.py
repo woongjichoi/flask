@@ -1,34 +1,4 @@
 from __future__ import division
-# https://thecodex.me/blog/speech-recognition-with-python-and-flask
-# https://github.com/Uberi/speech_recognition/blob/master/examples/microphone_recognition.py
-# https://dev.to/siddheshshankar/build-a-text-to-speech-service-with-python-flask-framework-3966
-
-# 파이썬 음성 인식 라이브러리 SpeechRecognition(https://pypi.org/project/SpeechRecognition/) → Google Cloud STT API
-# https://webnautes.tistory.com/1247
-
-from flask_cors import cross_origin
-from flask import Flask, render_template, request, redirect
-# NOTE: this example requires PyAudio because it uses the Microphone class
-#   - 윈도우는 PyAudio 설치 시 http://dslab.sangji.ac.kr/?p=2550과 같은 방법으로 해결해야 하는데 캡처와 같은 오류 발생하여 경로에 접근
-#   - what is the current encoding of the file? ansi
-#   - 주석보다 최상단에 #coding=<utf-8> 입력 후 다시 pipwin install pyaudio 실행하여 오류 해결
-import speech_recognition as sr # STT
-import pyttsx3 # TTS
-
-app = Flask(__name__)
-
-def text_to_speech(text, gender):
-    voice_dict = {'Male': 0, 'Female': 1}
-    code = voice_dict[gender]
-
-    engine = pyttsx3.init()
-    engine.setProperty('rate', 150)  # 말하기 속도
-    engine.setProperty('volume', 1)  # 볼륨 (min=0, MAX=1)
-    voices = engine.getProperty('voices')
-    engine.setProperty('voice', voices[code].id)
-
-    engine.say(text)
-    engine.runAndWait()
 
 import re
 import sys
@@ -110,6 +80,7 @@ class MicrophoneStream(object):
 
             yield b"".join(data)
 
+
 def listen_print_loop(responses):
     """Iterates through server responses and prints them.
 
@@ -156,19 +127,18 @@ def listen_print_loop(responses):
 
         else:
             print(transcript + overwrite_chars)
-            #return render_template('index.html', transcript=transcript)
-            break
 
             # Exit recognition if any of the transcribed phrases could be
             # one of our keywords.
-            #if re.search(r"\b(끝|종료)\b", transcript, re.I):
-                #print("Exiting..")
-                #break
+            if re.search(r"\b(끝|종료)\b", transcript, re.I):
+                print("Exiting..")
+                break
 
             num_chars_printed = 0
 
-@app.route("/", methods=["GET", "POST"])
-def index():
+def main():
+    # See http://g.co/cloud/speech/docs/languages
+    # for a list of supported languages.
     language_code = "ko-KR"  # a BCP-47 language tag
 
     client = speech.SpeechClient()
@@ -180,7 +150,7 @@ def index():
 
     streaming_config = speech.StreamingRecognitionConfig(
         config=config, interim_results=True
-    )  # single_utterance=True를 삭제하면 말하는 족족 계속 출력됨
+    ) # single_utterance=True를 삭제하면 말하는 족족 계속 출력됨
 
     with MicrophoneStream(RATE, CHUNK) as stream:
         audio_generator = stream.generator()
@@ -194,47 +164,5 @@ def index():
         # Now, put the transcription responses to use.
         listen_print_loop(responses)
 
-    return render_template('index.html', transcript=transcript)
-
-'''
-@app.route("/", methods=["GET", "POST"])
-def index():
-    transcript=""
-
-    # 마이크에서 오디오 얻기
-    r=sr.Recognizer()
-    with sr.Microphone() as source:
-        print("Say something!")
-        audio=r.listen(source)
-
-    # Google Speech Recognition을 이용해 음성 인식하기
-    # to use another API key, use `r.recognize_google(audio, key="GOOGLE_SPEECH_RECOGNITION_API_KEY")`
-    # instead of `r.recognize_google(audio)`
-    try:
-        transcript=r.recognize_google(audio, language="ko-KR")
-        print("Google Speech Recognition thinks you said "+transcript)
-    except sr.UnknownValueError:
-        print("Google Speech Recognition could not understand audio")
-    except sr.RequestError as e:
-        print("Could not request results from Google Speech Recognition service; {0}".format(e))
-
-    return render_template('index.html', transcript=transcript)
-'''
-
-# TTS
-@app.route("/tts", methods=["GET", "POST"])
-@cross_origin()
-def homepage():
-    if request.method=='POST':
-        # text="안녕" 이라고 하면 http://192.168.0.11:5000/tts 에서 뭘 입력하든 "안녕"을 읽어줌
-        text=request.form['speech']
-        gender=request.form['voices']
-        text_to_speech(text, gender)
-        print(text)
-        return render_template('frontend.html')
-    else:
-        return render_template('frontend.html')
-
-
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', debug=True, threaded=True)
+    main()
