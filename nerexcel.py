@@ -30,10 +30,11 @@ for i in range(10):   #문장갯수로 숫자 바꿔야함
  
  data2 
 
-
-
-
-
+#엑셆파일로 내보내기
+from google.colab import drive
+drive.mount('/content/drive')
+%cd '/content/drive/MyDrive/Colab Notebooks'
+data2.to_csv('ner.csv', index=False, header=True)
 
 
 
