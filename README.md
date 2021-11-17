@@ -61,3 +61,7 @@
     └── nerexcel.py
 
 ``` 
+
+## Kiosk Demo
+   안드로이드
+   윈도우
