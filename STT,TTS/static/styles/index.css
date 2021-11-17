@@ -1,0 +1,16 @@
+h1, p, input {
+    font-family: 'Lato', sans-serif;
+}
+
+#speechContainer {
+    margin: 20px;
+}
+
+#speechTranscriptContainer {
+    margin-top: 20px;
+}
+
+#speechText {
+    font-size: 18px;
+    width: 500px;
+}
