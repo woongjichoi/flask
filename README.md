@@ -14,10 +14,9 @@
 - 음성인식(Speech-To-Text): Google cloud Speech-To-Text
 - 음성합성(Text-To-Speech): Pyttsx3
 - 의도 파악 모델: Bi-LSTM,Mutinomial Naive Bayes 
-- 개체명 인식 모델:Bi-LSTM+CRF
+- 개체명 인식 모델: Bi-LSTM+CRF
 - 답변 생성 모델: Transformer
-- 서버:Flask 
-- 
+- 서버: Flask 
 ## API 시스템 구조도
 
 ![systemarchitecture](https://user-images.githubusercontent.com/61787171/142223280-59ecdffa-c486-4239-a324-4163cce4acb3.PNG)
