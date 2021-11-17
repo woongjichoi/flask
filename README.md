@@ -9,3 +9,8 @@
 - 음성인식 및 음성합성을 통한 대화
 - FAQ 질의응답
 
+## 개발 환경 및 시스템 구조도
+
+![systemarchitecture](https://user-images.githubusercontent.com/61787171/142222646-9553d944-85c2-4bcc-b2b3-4cfc67f9545c.PNG)
+
+## 파일 구조 
