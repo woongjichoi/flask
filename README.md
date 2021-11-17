@@ -1,4 +1,4 @@
-2021-2 capstone design preject 
+2021-2 capstone design preject 그로쓰4팀 키오조
 
 # 프로젝트 개요
  
