@@ -23,4 +23,40 @@
 
 
 
-## 파일 구조 
+## 파일 디렉토리 구조
+
+```bash
+├── STT,TTS
+│   ├── .idea
+│   │    ├── inspectionProfiles
+│   │    │   └── profiles_settings.xml
+│   │    ├── .gitignore
+│   │    ├── flaskrestful.iml
+│   │    ├── misc.xml
+│   │    ├── modules.xml
+│   │    └── vcs.xml
+│   ├── static
+│   │   └── styles
+│   │       └── index.css
+│   │
+│   ├── templates
+│   │   ├── frontend.html
+│   │   └── index.html
+│   ├── app.py
+│   ├── stttts.ipynb
+│   └── transcribe_streaming_mic.py
+├── chatbot
+│   ├── answer
+│   │   └── Chatbot Transformer model.py
+│   ├── intent
+│   │   ├─ Intent_bilstm.csv
+│   │   ├─ Mutinomial_tfidf.py
+│   │   └── lstmNBsfvoting.py
+│   ├─ ner
+│   │   └─ Chatbot NER.py
+│   └── scenario.py
+└── dataset
+    ├── dataset.py
+    └── nerexcel.py
+
+``` 
