@@ -26,6 +26,7 @@
 ## 파일 디렉토리 구조
 
 ```bash
+├── README.md
 ├── STT,TTS
 │   ├── .idea
 │   │    ├── inspectionProfiles
