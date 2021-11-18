@@ -64,5 +64,5 @@
 
 ## Kiosk Demo
    
-#### - [안드로이드 ver.](https://github.com/woongjichoi/chatbotdemo)
-#### - [윈도우 ver.](https://github.com/sonoasy/Kiosk_window/tree/main)
+#### [안드로이드 ver.](https://github.com/woongjichoi/chatbotdemo)
+#### [윈도우 ver.](https://github.com/sonoasy/Kiosk_window/tree/main)
