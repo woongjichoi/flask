@@ -48,12 +48,12 @@
 │   └── transcribe_streaming_mic.py
 ├── chatbot
 │   ├── answer
-│   │   └── Chatbot Transformer model.py
+│   │   └── answer_chatbot.py
 │   ├── intent
 │   │   ├─ Mutinomial_tfidf.py
 │   │   └── lstmNBsfvoting.py
 │   ├─ ner
-│   │   └─ Chatbot NER.py
+│   │   └─ ner_chatbot.py
 │   └── scenario.py
 └── dataset
     ├── ChatBotData_answer.csv
