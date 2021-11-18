@@ -50,13 +50,15 @@
 │   ├── answer
 │   │   └── Chatbot Transformer model.py
 │   ├── intent
-│   │   ├─ Intent_bilstm.csv
 │   │   ├─ Mutinomial_tfidf.py
 │   │   └── lstmNBsfvoting.py
 │   ├─ ner
 │   │   └─ Chatbot NER.py
 │   └── scenario.py
 └── dataset
+    ├── ChatBotData_answer.csv
+    ├─  Intent_bilstm.csv
+    ├─  Kiosk_NER_dataset.csv
     ├── dataset.py
     └── nerexcel.py
 
