@@ -1,0 +1,8 @@
+
+item : 상품명 B-item, I-item 
+num : 개수  B-num,I-num 
+pack : 매장/포장 B-pack, I-pack 
+point : 적립/포인트 B-point, I-point 
+pay : 결제 방식 B-pay, I-pay 
+option : 아이스,디카페인 B-option
+size : 사이즈 B-size
