@@ -64,5 +64,5 @@
 
 ## Kiosk Demo
    
-###  [안드로이드](https://github.com/woongjichoi/chatbotdemo)
-###  [윈도우]
+###  [안드로이드 ver.](https://github.com/woongjichoi/chatbotdemo)
+###  [윈도우 ver.]
