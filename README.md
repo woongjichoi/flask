@@ -58,7 +58,7 @@
 └── dataset
     ├── ChatBotData_answer.csv
     ├─  Intent_bilstm.csv
-    ├─  Kiosk_NER_dataset.csv
+    ├─  ChatBotData_ner.csv
     ├── dataset.py
     └── nerexcel.py
 
